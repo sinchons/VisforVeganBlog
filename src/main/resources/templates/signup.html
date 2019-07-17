@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/headers :: head(title='Registration Page')"></head>
+<body>
+<div class="container-fluid">
+    <section class="container">
+        <div class="container-page">
+            <form class="col-md-6" th:action="@{/signup}" th:object="${newUser}" method="POST" onsubmit="return checkForm(this);">
+                <h3 class="dark-grey">Registration</h3>
+
+                <div class="form-group col-lg-12">
+                    <label>Username</label>
+                    <input type="" name="username"
+                           class="form-control" id="" value="" th:field="*{username}">
+                </div>
+
+                <div class="form-group col-lg-6">
+                    <label>Password</label>
+                    <input type="password" name="password" autocomplete="new-password"
+                           class="form-control" id="" value="" th:field="*{password}">
+                </div>
+
+                <div class="form-group col-lg-6">
+                    <label>Email Address</label>
+                    <input type="email" name="email"
+                           class="form-control" id="" value="" th:field="*{email}">
+                </div>
+
+
+<!--                <div class="check-box">-->
+<!--                    <label for="chk-this"><input type="checkbox" name="agreeTerms" value="1" id="chk-this"> Agree with-->
+<!--                        Terms & Conditions</label>-->
+<!--                </div>-->
+
+                    <p><input type="checkbox" required name="terms"> I accept the <u>Terms and Conditions</u></p>
+                    <p><input type="submit"></p>
+
+
+<!--                <div class="row" th:text="${saveOk}"></div>-->
+<!--                <div class="row">-->
+<!--                    <button type="submit" style="width:100%" class="btn btn-primary">Register</button>-->
+<!--                </div>-->
+
+            </form>
+
+            <div class="col-md-6">
+                <h3 class="dark-grey">Terms and Conditions</h3>
+                <p>
+                    By clicking on "Register" you agree to The Company's' Terms and Conditions
+                </p>
+                <p>
+                    All content provided on this blog is for informational purposes only. The owner of this blog makes
+                    no representations as to the accuracy or completeness of any information on this site or found by
+                    following any link on this site. The owner will not be liable for any errors or omissions in this
+                    information nor for the availability of this information. The owner will not be liable for any
+                    losses, injuries, or damages from the display or use of this information. These terms and conditions
+                    of use are subject to change at any time and without notice.
+                </p>
+                <p>
+                    We do not share personal information with third-parties nor do we store information we collect about
+                    your visit to this blog for use other than to analyze content performance through the use of
+                    cookies, which you can turn off at anytime by modifying your internet browser's settings. We are not
+                    responsible for the republishing of the content found on this blog on other websites or media
+                    without our permission. This privacy policy is subject to change without notice.
+                </p>
+
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

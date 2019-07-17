@@ -1,0 +1,30 @@
+Comments to Classes:
+
+PlantwateringApplication:
+This class configures and starts your Spring Boot application, which is still empty. 
+The @SpringBootApplication annotation applies the default configuration settings for our 
+Spring Boot application (finds and loads all entities, controllers, UI templates and 
+other application assets). Calling SpringApplication.run(…) will start an embedded Tomcat 
+Web application server at http://localhost:8080 to serve the HTTP requests to your Spring MVC Web application.
+
+// ja laiks pielikt, lai vins genere smiekligus random username
+
+HomeController:
+The above code defines a Spring Web MVC controller and defines an action that handles HTTP GET requests 
+for the root URL of the project “/“. When someone opens http://localhost:8080/ form a Web browser, the above action 
+will be called. It returns the “index” view and this means to render a Thymeleaf template “index.html” 
+located in the file src/main/resources/templates/index.html.
+
+Controllers – hold the presentation (UI) logic – process user request (GET / POST / other), 
+prepare data for the view and render the view (or redirect to another URL). Example: prepare and show the home page.
+Services – hold the business logic. Often just call some repository method. Example: create new post / 
+show a post for deleting / delete post. Services may have several implementations: DB based or stub based.
+Repositories – implement the database CRUD operations (create / read / edit / delete) in the database for certain 
+entity class (model). Examples: find post by id / delete post by id. Often provided by the framework (not written by hand).
+Models (entity classes) – holds the data about the application data. Examples: user, post, tag, …
+
+Note the @Autowired annotation before the postService field. This is the
+“magic” of Spring Framework. It automatically injects the correct implementation for your services at the places where they are needed. 
+Developers just type “@Autowired“. Spring scans the project and finds all classes that implement the service interface. 
+If only one such class is found, it is instantiated and its instance is auto-wired (injected) in the field or method parameter where it is requested.
+

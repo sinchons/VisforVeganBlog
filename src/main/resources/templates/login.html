@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<!--&lt;!&ndash;<head th:replace="fragments/headers :: head(title='Login')"></head>&ndash;&gt;-->
+<!--<body>-->
+<!--<form th:action="@{/login}" method="post">-->
+<!--    <label>Username</label>-->
+<!--    <input name="username" type="text" autocomplete="username">-->
+<!--    <label>Password</label>-->
+<!--    <input name="password" type="password" autocomplete="current-password">-->
+<!--    <input type="submit">-->
+<!--</form>-->
+
+<div class="form-popup" id="myForm">
+    <form action="/action_page.php" class="form-container" method="post" th:action="@{/login}">
+        <h1>Login</h1>
+
+        <label for="email"><b>Email</b></label>
+        <input type="text" placeholder="Enter Email" name="email" required>
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="psw" required>
+
+        <button type="submit" class="btn">Login</button>
+        <button type="submit" class="btn cancel" onclick="closeForm()">Close</button>
+    </form>
+</div>
+</body>
+</html>

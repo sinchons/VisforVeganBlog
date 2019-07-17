@@ -1,0 +1,56 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<form>-->
+<!--    <div th:each = "post : ${latestposts}" >-->
+<!--&lt;!&ndash;    <div th:text="${post.author}"></div>&ndash;&gt;-->
+<!--    <div th:text="${post.title}"></div>-->
+
+<!--    </div>-->
+<!--</form>-->
+
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!--<head th:replace="layout :: site-head">-->
+<head>
+    <div th:each="post : ${latestposts}">
+        <title th:text="${post.title}">View Post</title>
+    </div>
+</head>
+
+<body>
+<header>header</header>
+<header th:replace="layout :: site-header"/>
+
+<main id="posts">
+    <article>
+        <div th:each="post : ${latestposts}">
+            <h2 class="title" th:text="${post.title}">Post Title</h2>
+            <div class="date">
+                <i>Posted on</i>
+                <!--            <span th:text="${#dates.format(post.date, 'dd-MMM-yyyy')}">22-May-2016</span>-->
+                <!--            <span th:if="${post.author}" th:remove="tag">-->
+                <!--        <i>by</i>-->
+                <!--        <span th:text="${post.author.fullName != null ?-->
+                <!--                         post.author.fullName : post.author.username}">Svetlin Nakov</span>-->
+                <!--        </span>-->
+            </div>
+            <p class="content" th:utext="${post.body}">Post content</p>
+        </div>
+    </article>
+</main>
+
+<!--<footer th:replace="layout :: site-footer"/>-->
+<footer>footer</footer>
+
+</body>
+
+</html>
