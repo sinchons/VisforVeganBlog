@@ -29,8 +29,8 @@ public class CustomWebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/","/signup","/resources/**").permitAll()
-                .anyRequest().permitAll()
+                .antMatchers("/", "/contact","/signup","/img/**","/css/**","/js/**").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -38,24 +38,6 @@ public class CustomWebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureUrl("/")
                 .permitAll();
     }
-
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication()
-//                .withUser("ADMIN1")
-//                .password(passwordEncoder().encode("abc123"))
-//                .roles("ADMIN").and()
-//                .withUser("ADMIN2")
-//                .password(passwordEncoder().encode("def456"))
-//                .roles("ADMIN");
-//
-//    }
-
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//    http.authorizeRequests().anyRequest().permitAll();
-//    //antMatchers path vai role kur atlauj
-//    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
