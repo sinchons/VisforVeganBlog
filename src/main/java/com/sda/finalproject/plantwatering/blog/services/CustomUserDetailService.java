@@ -23,7 +23,10 @@ public class CustomUserDetailService implements UserDetailsService {
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         User username = userRepository.findByUsername(s);
         if (username == null) {
-            throw new UsernameNotFoundException("User not found!");
+            username = userRepository.findByEmail(s);
+            if (username == null) {
+                throw new UsernameNotFoundException("User not found!");
+            }
         }
 
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();

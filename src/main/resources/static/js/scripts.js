@@ -19,3 +19,9 @@ function openForm() {
 function closeForm() {
     document.getElementById("myForm").style.display = "none";
 }
+
+/*##################### Instagram embed width ####################################*/
+
+// var myElement = document.getElementById("instagram-embed-0");
+//     myElement.style.height = "461px";
+// document.getElementById("instagram-embed-0").style.height = "461px";

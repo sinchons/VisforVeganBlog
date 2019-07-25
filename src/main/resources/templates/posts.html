@@ -1,56 +1,62 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Title</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<form>-->
-<!--    <div th:each = "post : ${latestposts}" >-->
-<!--&lt;!&ndash;    <div th:text="${post.author}"></div>&ndash;&gt;-->
-<!--    <div th:text="${post.title}"></div>-->
-
-<!--    </div>-->
-<!--</form>-->
-
-<!--</body>-->
-<!--</html>-->
-
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
-<!--<head th:replace="layout :: site-head">-->
-<head>
-    <div th:each="post : ${latestposts}">
-        <title th:text="${post.title}">View Post</title>
-    </div>
-</head>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/headers :: head(title='Posts &#129498')"></head>
 
 <body>
-<header>header</header>
-<header th:replace="layout :: site-header"/>
+<div class="container-fluid">
+    <section class="container">
+        <div th:replace="fragments/navbar :: navbar"></div>
+        <div class="container-page">
+            <form class="row">
+                <div class="form-group col-lg-8">
+                    <div class="card">
+                        <div class="allposts">
+                            <p>Explore interesting posts:</p>
+                            <article>
+                                <div th:each="post : ${allposts}">
+                                    <h2 th:text="${post.title}"> </h2>
+                                    <h5 th:text="${#dates.format(post.date, 'dd-MMM-yyyy')}
+                            + ' by ' + ${post.getAuthor().getUsername()}"></h5>
 
-<main id="posts">
-    <article>
-        <div th:each="post : ${latestposts}">
-            <h2 class="title" th:text="${post.title}">Post Title</h2>
-            <div class="date">
-                <i>Posted on</i>
-                <!--            <span th:text="${#dates.format(post.date, 'dd-MMM-yyyy')}">22-May-2016</span>-->
-                <!--            <span th:if="${post.author}" th:remove="tag">-->
-                <!--        <i>by</i>-->
-                <!--        <span th:text="${post.author.fullName != null ?-->
-                <!--                         post.author.fullName : post.author.username}">Svetlin Nakov</span>-->
-                <!--        </span>-->
-            </div>
-            <p class="content" th:utext="${post.body}">Post content</p>
+                                    <p th:text="${post.body}"></p>
+                                </div>
+                            </article>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-group col-lg-4" sec:authorize="isAuthenticated()">
+                    <div class="card">
+                        <h3>Hey,
+                            <span sec:authentication="name"></span>! Check out your latest posts:
+                        </h3>
+                        <article>
+                            <div th:each="post : ${latestposts}">
+                                <h2 class="title" th:text="${post.title}">Post Title</h2>
+                                <div class="date">
+                                    <i>Posted on</i>
+                                    <span th:text="${#dates.format(post.date, 'dd-MMM-yyyy')}"></span>
+                                    <span th:if="${post.author}" th:remove="tag">
+                        <i>by</i>
+                        <span th:text="${post.author.username != null ?
+                                         post.author.username : post.author.username}"></span>
+                        </span>
+                                </div>
+                                <p class="content" th:utext="${post.body}">Post content</p>
+                                <div class="actions">
+                                    <a th:href="@{'/editpost/'+${post.id}}" type="submit" class="button">Edit</a>
+                                    <a th:href="@{'/editpost/'+${post.id}}" class="button button-secondary">Delete</a>
+                                </div>
+                            </div>
+                            <br>
+                        </article>
+                    </div>
+                </div>
+            </form>
         </div>
-    </article>
-</main>
-
-<!--<footer th:replace="layout :: site-footer"/>-->
-<footer>footer</footer>
-
+    </section>
+</div>
 </body>
 
 </html>
